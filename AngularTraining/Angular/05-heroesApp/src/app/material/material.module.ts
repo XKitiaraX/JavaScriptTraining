@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -11,6 +12,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -18,6 +21,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatGridListModule,
     MatIconModule,
@@ -25,6 +29,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatListModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatSnackBarModule,
     MatSidenavModule,
     MatToolbarModule
   ]

@@ -1,4 +1,8 @@
-<h1>Nuevo Héroe <small>{{heroe.superhero}}</small></h1>
+<h1>
+  {{(heroe.id) ? 'Editar' : 'Nuevo'}}
+  Héroe
+  <small>{{heroe.superhero}}</small>
+</h1>
 
 <div fxLayout="row"
      fxLayout.xs="column"
@@ -26,7 +30,7 @@
       </mat-form-field>
     </div>
 
-    <mat-form-field fxFlex="100">
+    <mat-form-field>
       <mat-label>Primera Aparición</mat-label>
       <input matInput
              type="text"
@@ -34,7 +38,7 @@
              required>
     </mat-form-field>
 
-    <mat-form-field fxFlex="100">
+    <mat-form-field>
       <mat-label>Personajes</mat-label>
       <input matInput
              type="text"
@@ -42,7 +46,7 @@
              required>
     </mat-form-field>
 
-    <mat-form-field fxFlex="100">
+    <mat-form-field>
       <mat-label>Creador</mat-label>
       <mat-select [(ngModel)]="heroe.publisher"
                   required>
@@ -68,7 +72,7 @@
               color="primary"
               (click)="guardar()">
         <mat-icon>save</mat-icon>
-        Guardar
+        {{(heroe.id) ? 'Actualizar' : 'Crear'}}
       </button>
 
       <span class="spacer"></span>
