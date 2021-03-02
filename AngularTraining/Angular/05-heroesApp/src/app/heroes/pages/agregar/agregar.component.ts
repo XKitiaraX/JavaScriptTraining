@@ -3,6 +3,9 @@ import {Heroe, Publisher} from '../../interfaces/heroes.interface';
 import {HeroesService} from '../../services/heroes.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmarComponent} from '../../components/confirmar/confirmar.component';
 
 @Component({
   selector: 'app-agregar',
@@ -38,7 +41,9 @@ export class AgregarComponent implements OnInit {
 
   constructor(private heroesService: HeroesService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private snackbar: MatSnackBar,
+              public  matDialog: MatDialog) { }
 
   ngOnInit(): void {
     if (this.router.url.includes('editar')) {
@@ -55,12 +60,13 @@ export class AgregarComponent implements OnInit {
     if (this.heroe.id) {
       // Actualizar
       this.heroesService.actualizarHeroe(this.heroe)
-        .subscribe( heroe => console.log('Actualizando', heroe))
+        .subscribe( heroe => this.mostrarSnackbar('Registro actualizado'))
     } else {
       // Crear
       if (this.heroe.superhero.trim().length != 0) {
         this.heroesService.agregarHeroe(this.heroe)
           .subscribe(heroe => {
+            this.mostrarSnackbar('Registro creado')
             this.router.navigate(['/heroes/editar', heroe.id]);
           })
       }
@@ -68,10 +74,29 @@ export class AgregarComponent implements OnInit {
   }
 
   borrar() {
-    this.heroesService.borrarHeroe(this.heroe.id!)
-      .subscribe( resp => {
-        this.router.navigate(['/heroes'])
-      })
+
+    const dialog = this.matDialog.open(ConfirmarComponent, {
+      width: '250px',
+      data: {...this.heroe}
+    });
+
+    dialog.afterClosed().subscribe((result) => {
+      if (result) {
+        this.heroesService.borrarHeroe(this.heroe.id!)
+          .subscribe( resp => {
+            this.router.navigate(['/heroes']);
+          });
+      }
+    })
+
+  }
+
+  mostrarSnackbar( mensaje: string) {
+
+    this.snackbar.open(mensaje, 'Ok!', {
+      duration: 2500
+    });
+
   }
 
 }
