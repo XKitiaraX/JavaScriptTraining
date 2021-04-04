@@ -17,10 +17,10 @@ interface MenuItem {
 export class MenuComponent {
 
   menu: MenuItem[] = [
-    { ruta: 'graficas/barra', texto: 'Barras'},
-    { ruta: 'graficas/barra-doble', texto: 'Barras doble'},
-    { ruta: 'graficas/dona', texto: 'Donut'},
-    { ruta: 'graficas/dona-http', texto: 'Donut http'},
+    { ruta: 'grafica/barra', texto: 'Barras'},
+    { ruta: 'grafica/barra-doble', texto: 'Barras doble'},
+    { ruta: 'grafica/dona', texto: 'Donut'},
+    { ruta: 'grafica/dona-http', texto: 'Donut http'},
   ]
 
 }
